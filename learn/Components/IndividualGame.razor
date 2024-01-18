@@ -1,0 +1,29 @@
+﻿
+<div class="col-sm-12 col-md-4 p-3 text-center">
+	<div class="game-name">
+		@Game?.Name
+	</div>
+	<hr class="hr-fix"/>
+
+	<div class="card-image">
+		<a href="#">
+			<img src="@Game?.ImageLink" alt="@Game?.Name" class="game-image" />
+		</a>
+	</div>
+	<hr class="hr-fix" />
+
+	<div class="game-card-footer">
+		<div class="btn-group my-3 text-center" role="group">
+			<a href="#" class="btn btn-outline-info">
+				<i class="fa-solid fa-pen-to-square"/>
+			</a>
+			<button type="button" class="btn btn-outline-danger">
+				<i class="fa-solid fa-trash-can" />
+			</button>
+		</div>
+	</div>
+</div>
+@code {
+	[Parameter]
+	public GameModel? Game { get; set; }
+}
