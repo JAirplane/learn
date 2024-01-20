@@ -1,12 +1,12 @@
 ﻿
 <div class="col-sm-12 col-md-4 p-3 text-center">
 	<div class="game-name">
-		@Game?.Name
+		<a href="@url">@Game?.Name</a>
 	</div>
 	<hr class="hr-fix"/>
 
 	<div class="card-image">
-		<a href="#">
+		<a href="@url">
 			<img src="@Game?.ImageLink" alt="@Game?.Name" class="game-image" />
 		</a>
 	</div>
@@ -26,4 +26,11 @@
 @code {
 	[Parameter]
 	public GameModel? Game { get; set; }
+
+	private string url = string.Empty;
+
+	protected override void OnInitialized()
+	{
+		url = $"/games/{Game?.Id}/{Game?.Name?.Replace(" ", "-")}";
+	}
 }

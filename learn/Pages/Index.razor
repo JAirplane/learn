@@ -1,5 +1,7 @@
 ﻿@page "/"
 
+@inject IRepository repository
+
 <PageTitle>Index</PageTitle>
 
 <GameList GameCollection="gameColl" />
@@ -7,5 +9,8 @@
 @code{
 	private List<GameModel>? gameColl = new();
 
-
+	protected override void OnInitialized()
+	{
+		gameColl = repository.GetAllGames();
+	}
 }
