@@ -1,5 +1,76 @@
-﻿@page "/genres/edit"
+﻿@page "/genres/edit/{GenreId:int}"
+@inject IRepository db
+
+<div class="row">
+	<div class="col">
+		<h1 class="text-info">Edit Genre</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+		@if(genre != null)
+		{
+			<ForGenre Genre="genre" Submit="Edit" />
+		}
+		else
+		{
+			<div class="alert alert-info">
+				Invalid ID, Please try again!
+			</div>
+		}
+	</div>
+	<div class="col-6">
+		@if(message != null)
+		{
+			<div class="@cssClass text-center py-2">@message</div>
+			@foreach(var g in allGenres)
+			{
+				<div class="row justify-content-lg-between m-1 text-white">
+					<div class="col-6 bg-primary">
+						ID: @g.Id
+					</div>
+					<div class="col-6 bg-info">
+						Name: @g.Name
+					</div>
+				</div>
+			}
+		}
+	</div>
+</div>
 
 @code {
+	[Parameter]
+	public int GenreId{ get; set; }
 
+	private Genre? genre;
+	private string message = string.Empty;
+	private string cssClass = string.Empty;
+	private List<Genre> allGenres = new();
+
+	protected override void OnInitialized()
+	{
+		genre = db.GetGenreById(GenreId);
+	}
+
+	public void Edit()
+	{
+		var result = db.EditGenre(genre);
+		if(result)
+		{
+			cssClass = "alert alert-success";
+			message = "Edited Successfully";
+			UpdateGenreList();
+		}
+		else
+		{
+			cssClass = "alert alert-danger";
+			message = "Edition Failed";
+		}
+	}
+	public void UpdateGenreList()
+	{
+		allGenres = new();
+		allGenres = db.GetAllGenres();
+	}
 }

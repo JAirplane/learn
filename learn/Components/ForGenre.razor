@@ -1,9 +1,9 @@
-﻿@* <EditForm Model="Genre" OnValidSubmit="Submit">
+﻿<EditForm Model="Genre" OnValidSubmit="Submit">
 	<DataAnnotationsValidator />
 	<div class="form-group">
 		<label>Genre Name: </label>
 		<div>
-			<InputText class="form-control mb-2" @bind-Value="Genre?.Name" />
+			<InputText class="form-control mb-2" @bind-Value="Genre.Name" />
 			<ValidationMessage For="(() => Genre.Name)" />
 		</div>
 	</div>
@@ -16,4 +16,3 @@
 	[Parameter]
 	public EventCallback Submit{ get; set; }
 }
- *@
