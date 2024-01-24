@@ -10,4 +10,8 @@
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Tewr.Blazor.FileReader" Version="3.3.2.23201" />
+  </ItemGroup>
+
 </Project>
