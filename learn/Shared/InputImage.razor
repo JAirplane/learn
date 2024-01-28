@@ -7,8 +7,9 @@
 		<span class="input-group-text" id="inputGroupFile">@Label</span>
 	</div>
 	<div class="custom-file">
-		<input type="file" class="custom-file-input" id="inputGroupFileField" aria-describedby="inputGroupFile" @ref="inputElement" @onchange="OnImageSelectedHandler" accept=".jpg, .jpeg, .png"/>
-		<label class="custom-file-label" for="inputGroupFileField">@fileName</label>
+		<input type="file" class="form-control" id="inputGroupFileField" aria-describedby="inputGroupFile" @ref="inputElement"
+																	@onchange="OnImageSelectedHandler" accept=".jpg, .jpeg, .png"/>
+		<label class="input-group-text" for="inputGroupFileField">@fileName</label>
 	</div>
 </div>
 

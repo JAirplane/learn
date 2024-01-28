@@ -1,6 +1,7 @@
 ﻿@page "/games/create"
 
 @inject NavigationManager navManager
+@inject IRepository db
 
 <div class="row">
 	<div class="col">
@@ -9,14 +10,27 @@
 </div>
 
 <div class="row">
-	<div class="col text-center">
-		<button @onclick="AddNewGame" class="btn btn-primary">Add New Game</button>
+	<div class="col">
+		<GameForm Game="game" OnValidSubmit="AddNewGame" NotSelectedGenres="notSelectedGenres" />
 	</div>
 </div>
 
 @code {
+	private GameModel game = new();
+	private List<Genre> notSelectedGenres = new();
+
+	protected override void OnInitialized()
+	{
+		notSelectedGenres = db.GetAllGenres();
+	}
+
 	void AddNewGame()
 	{
-		navManager.NavigateTo("games");
+		bool addResult = db.CreateNewGame(game);
+		Console.WriteLine($"Games in DB / after creation new game: {db.GetAllGames().Count}");
+		if(addResult)
+		{
+			navManager.NavigateTo("/");
+		}
 	}
 }

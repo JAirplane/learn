@@ -19,7 +19,7 @@ else
 	<div class="row">
 		@foreach (var game in GameCollection)
 		{
-			<IndividualGame Game="game" />
+			<IndividualGame Game="game" OnDeleteGame="DeleteGame"/>
 		}
 	</div>
 }
@@ -27,4 +27,9 @@ else
 @code {
 	[Parameter]
 	public List<GameModel>? GameCollection { get; set; }
+
+	public void DeleteGame(GameModel forDeletion)
+	{
+		GameCollection.Remove(forDeletion);
+	}
 }

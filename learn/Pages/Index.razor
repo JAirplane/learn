@@ -4,6 +4,15 @@
 
 <PageTitle>Index</PageTitle>
 
+@if (gameColl.Count != repository.GetAllGames().Count)
+{
+	gameColl = repository.GetAllGames();
+}
+@if(true)
+{
+	check();
+}
+
 <GameList GameCollection="gameColl" />
 
 @code{
@@ -12,5 +21,11 @@
 	protected override void OnInitialized()
 	{
 		gameColl = repository.GetAllGames();
+		Console.WriteLine($"Initialization: {gameColl.Count} games");
+	}
+	public void check()
+	{
+		Console.WriteLine($"Games in DB / MainPage: {gameColl.Count}");
+		Console.WriteLine($"Games in gameColl / MainPage: {gameColl.Count}");
 	}
 }
