@@ -4,13 +4,15 @@
 
 <PageTitle>Index</PageTitle>
 
+<TypeHead OnSearchHandler="SearchHandler" OnPlaceHolder="Search...">
+	<ResultTemplate>
+		@context
+	</ResultTemplate>
+</TypeHead>
+
 @if (gameColl.Count != repository.GetAllGames().Count)
 {
 	gameColl = repository.GetAllGames();
-}
-@if(true)
-{
-	check();
 }
 
 <GameList GameCollection="gameColl" />
@@ -21,11 +23,17 @@
 	protected override void OnInitialized()
 	{
 		gameColl = repository.GetAllGames();
-		Console.WriteLine($"Initialization: {gameColl.Count} games");
 	}
-	public void check()
+	async Task<IEnumerable<string>> SearchHandler(string searchText)
 	{
-		Console.WriteLine($"Games in DB / MainPage: {gameColl.Count}");
-		Console.WriteLine($"Games in gameColl / MainPage: {gameColl.Count}");
+		await Task.Delay(2000);
+		if(searchText.Equals("test"))
+		{
+			return Enumerable.Empty<string>();
+		}
+		return new List<string>() {
+			"CD Project Red",
+			"Giants Software"
+		};
 	}
 }

@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddTransient<IRepository, GamesRepository>();
+builder.Services.AddScoped<IRepository, GamesRepository>();
 
 builder.Services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
 
