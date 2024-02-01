@@ -1,4 +1,4 @@
-﻿using learn.Models;
+﻿using DataAccess.Models;
 
 namespace learn.Data.Repository
 {

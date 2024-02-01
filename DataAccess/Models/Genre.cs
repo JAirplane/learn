@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace learn.Models
+namespace DataAccess.Models
 {
 	public class Genre
 	{
@@ -8,6 +8,6 @@ namespace learn.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-        public List<GamesGenres> GamesGenres { get; set; } = new();
+        public IEnumerable<GameModel> Games { get; set; }
     }
 }
