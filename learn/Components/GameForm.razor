@@ -1,4 +1,6 @@
 ﻿@using learn.Helpers
+@inject IRepository db
+
 <EditForm Model="Game" OnValidSubmit="OnValidSubmit">
 	<DataAnnotationsValidator />
 
@@ -46,6 +48,19 @@
 		<MultipleSelector OnSelected="Selected" OnNotSelected="NotSelected" />
 	</div>
 
+	<div class="form-group">
+		<label>Developers:</label>
+		<MultipleSelectorTypeAhead Context="GameDeveloper" OnSearch="SearchHandler" OnSelectedElements="SelectedDevelopers">
+			<ResultTemplate>
+				<img style="width: 50px;" src="@GameDeveloper.Image"/>
+				@GameDeveloper.Name
+			</ResultTemplate>
+			<ListTemplate>
+				@GameDeveloper.Name
+			</ListTemplate>
+		</MultipleSelectorTypeAhead>
+	</div>
+
 	<button class="btn btn-primary" type="submit">Save Changes</button>
 
 </EditForm>
@@ -66,6 +81,10 @@
 	[Parameter]
 	public List<MultipleSelectorHelperModel>? NotSelected { get; set; }
 
+	[Parameter]
+	public List<GameDeveloper> SelectedDevelopers { get; set; } = new();
+
+
 	protected override void OnInitialized()
 	{
 		Selected = SelectedGenres.Select(x => new MultipleSelectorHelperModel(x.Id.ToString(), x.Name)).ToList();
@@ -85,5 +104,10 @@
 	{
 		Game.ImageLink = imageBase64;
 		imageUrl = null;
+	}
+
+	async Task<IEnumerable<GameDeveloper>> SearchHandler(string searchText)
+	{
+		return db.GetAllDevelopers();
 	}
 }

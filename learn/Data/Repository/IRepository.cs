@@ -10,5 +10,6 @@ namespace learn.Data.Repository
 		public List<Genre> GetAllGenres();
 		public Genre GetGenreById(int id);
 		public bool EditGenre(Genre editedGenre);
+		public List<GameDeveloper> GetAllDevelopers();
 	}
 }
